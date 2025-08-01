@@ -20,7 +20,7 @@ install(TARGETS KDataFrame EXPORT KDataFrameTargets)
 
 # ターゲットをエクスポート
 install(EXPORT KDataFrameTargets
-  FILE KDataFrameTargets.cmake
+  FILE KDataFrame.cmake
   NAMESPACE KBA::
   DESTINATION ${CMAKE_INSTALL_LIBDIR}/cmake/KDataFrame
 )

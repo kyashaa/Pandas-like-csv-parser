@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['like_20csv_20parser_0',['Pandas module like CSV Parser',['../index.html',1,'']]]
+  ['mcolumnname_0',['mcolumnName',['../structKCsvStruct.html#a566d60973b59e9f27ca21ea80b5c257a',1,'KCsvStruct']]]
 ];
