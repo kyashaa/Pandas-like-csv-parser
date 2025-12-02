@@ -2,14 +2,11 @@
  * @file KDataFrame.h
  * @brief pandas module like CSV parser
  * @author K. Kotera
- * @date 2024-11-01
- * @version b 1.0.1
+ * @date 2025-12-02
+ * @version 0.0.3
  *
  * @details pythonのpandasモジュール的なことができることを目指して開発が始まったCSVパーサ.
- * @note めっちゃ開発段階. C++17.
- * @par バージョン履歴
- * - b 1.0.1 (2024-11-01) 対応バージョンの修正C++14->C++17. 今後C++14に対応予定.
- * - b 1.0.0 (2024-10-30 - 2024-10-31) 初期リリース.
+ * @note めっちゃ開発段階. C++17, C++14
 */
 #ifndef __KDATAFRAME_H__
 #define __KDATAFRAME_H__
@@ -30,72 +27,100 @@
 #include <regex>
 #include <variant>
 
+class KSingleVectorComponent;
+class KSingleVector;
+
 using tvString = std::vector<std::string>;
 using tKeyMap  = std::map          <std::string, int>;
 using tKeyUMap = std::unordered_map<std::string, int>;
 
 #if __cplusplus > 201402L
-using KVector = std::variant<int, double, std::string>;
-
-//! @brief 文字列を自動的に整数、浮動小数点へキャストします.
-//! @param inp_val[in] 変換元の文字列
-//! @return 自動キャストされた値[int, double, string].
-//! @details 文字列のパターンから自動的に整数、浮動小数点へ変換します.
-//! 変換できなかった場合変換は行われず、std::stringとして返します.
-//! @note std::variantがC+17以降はこちらの関数が機能します.
-//! 詳細は\ref T StringTo(const std::string &inp_val)を参照してください.
-KVector StringTo(const std::string &inp_val)
-{
-    // 正規表現
-    std::regex IntPattern("^-?\\d+$");                    // 整数
-    std::regex FloatPattern("^-?\\d*\\.\\d+$");           // 浮動小数点
-    std::regex ExpPattern("^-?\\d*\\.?\\d+[eE][-+]?\\d+$"); // 指数表記
-
-    if (std::regex_match(inp_val, IntPattern)) 
-    {
-        return std::stoi(inp_val);  // 整数に変換
-    } 
-    else if (std::regex_match(inp_val, FloatPattern)) 
-    {
-        return std::stod(inp_val);  // 浮動小数点数に変換
-    } 
-    else if (std::regex_match(inp_val, ExpPattern)) 
-    {
-        return std::stod(inp_val);  // 指数表記を浮動小数点数に変換
-    } 
-    else return inp_val; // どれにも該当しない場合は文字列として返す
-}
-#else
-
-//! @brief 文字列を指定の型へ変換します
-//! @param inp_val[in] 変換元の文字列
-//! @return キャストされた値(int, double).
-//! @note C++14用に実装されました.C++17のStringTo関数はstd::variantによって「自動的に」文字列のキャストが行われます.
-template<class T> T StringTo(const std::string &inp_val)
-{
-    T Result;
-    std::stringstream StrStr(inp_val);
-    
-    StrStr>>Result;
-
-    // // 変換が失敗、もしくは変換後にデータが残っている場合は例外を投げる
-    // if (ss.fail() || !ss.eof()) {
-    //     throw std::invalid_argument("Conversion failed for input: " + inp_val);
-    // }
-    return Result;
-}
-
-//! @brief 文字列を指定の型へ変換します
-//! @param inp_val[in] 変換元の文字列
-//! @return キャストされた値(int, double).
-//! @details 文字列に対する関数templateの部分特殊化.
-//! @note C++14用に実装されました.C++17のStringTo関数はstd::variantによって「自動的に」文字列のキャストが行われます.
-template <>
-std::string StringTo<std::string>(const std::string& inp_val)
-{
-    return inp_val;
-}
+	using KVector = std::variant<int, double, std::string>;
 #endif
+
+//! @brief 文字列を整形するために使う名前空間.
+namespace KStringFmt
+{
+	//! @brief 改行文字を統一(windowsで採用されている改行コード"\r\n"の"\r"を削除)します.
+	void GetStripCR(std::string &line)
+	{
+		// std::cout<<"aaaaa: "<<line<<std::endl;
+		if (!line.empty() && line.back() == '\r') line.pop_back();
+		// std::cout<<"aaaaa: "<<line<<std::endl;
+	}
+	
+	//! @brief 文字の前後の半角、全角空白とタブを削除します.
+	void Strip(std::string &line)
+	{
+		// std::cout<<"bbbbb: "<<line<<std::endl;
+		const std::string Chars = " \t　";
+		line.erase(0, line.find_first_not_of(Chars));
+		// std::cout<<"bbbbb: "<<line<<std::endl;
+		line.erase(line.find_last_not_of(Chars)+1);
+		// std::cout<<"bbbbb: "<<line<<std::endl;
+	}
+
+	//! @brief 文字列を指定の型へ変換します
+	//! @param inp_val[in] 変換元の文字列
+	//! @return キャストされた値(int, double).
+	//! @note C++14用に実装されました.C++17のStringTo関数はstd::variantによって「自動的に」文字列のキャストが行われます.
+	template<class T> T StringTo(const std::string &inp_val)
+	{
+		T Result;
+		std::stringstream StrStr(inp_val);
+		
+		StrStr>>Result;
+
+		// // 変換が失敗、もしくは変換後にデータが残っている場合は例外を投げる
+		// if (ss.fail() || !ss.eof()) {
+		//     throw std::invalid_argument("Conversion failed for input: " + inp_val);
+		// }
+		return Result;
+	}
+
+	//! @brief 文字列を指定の型へ変換します
+	//! @param inp_val[in] 変換元の文字列
+	//! @return キャストされた値(int, double).
+	//! @details 文字列に対する関数templateの部分特殊化.
+	//! @note C++14用に実装されました.C++17のStringTo関数はstd::variantによって「自動的に」文字列のキャストが行われます.
+	template <>
+	std::string StringTo<std::string>(const std::string& inp_val)
+	{
+		return inp_val;
+	}
+
+	#if __cplusplus > 201402L
+		//! @brief 文字列を自動的に整数、浮動小数点へキャストします.
+		//! @param inp_val[in] 変換元の文字列
+		//! @return 自動キャストされた値[int, double, string].
+		//! @details 文字列のパターンから自動的に整数、浮動小数点へ変換します.
+		//! 変換できなかった場合変換は行われず、std::stringとして返します.
+		//! @note std::variantがC+17以降はこちらの関数が機能します.
+		//! 詳細は\ref T StringTo(const std::string &inp_val)を参照してください.
+		KVector StringTo(const std::string &inp_val)
+		{
+			// 正規表現
+			std::regex IntPattern("^-?\\d+$");                    // 整数
+			std::regex FloatPattern("^-?\\d*\\.\\d+$");           // 浮動小数点
+			std::regex ExpPattern("^-?\\d*\\.?\\d+[eE][-+]?\\d+$"); // 指数表記
+
+			if (std::regex_match(inp_val, IntPattern)) 
+			{
+				return std::stoi(inp_val);  // 整数に変換
+			} 
+			else if (std::regex_match(inp_val, FloatPattern)) 
+			{
+				return std::stod(inp_val);  // 浮動小数点数に変換
+			} 
+			else if (std::regex_match(inp_val, ExpPattern)) 
+			{
+				return std::stod(inp_val);  // 指数表記を浮動小数点数に変換
+			} 
+			else return inp_val; // どれにも該当しない場合は文字列として返す
+		}
+	#endif
+
+};
 
 //! @brief std::vectorに対する標準出力の<<演算子のオーバーロード.
 //! @details std::vectorに対して<<演算子はオーバーロードされていないので実装.
@@ -223,7 +248,9 @@ void KDataFrame::Init()
 //! 整数・浮動小数点の桁数を取得します。
 template<typename T> int KDataFrame::GetOrder(T val)
 {
-
+	int Order = 0;
+	std::cout<<"Not implemented"<<std::endl;
+	return Order;
 }
 
 //! @brief ファイルを開きます
@@ -244,6 +271,8 @@ void KDataFrame::Open()
     unsigned Counter=0;
     while (std::getline(InpFile, BufLine))
     {
+		KStringFmt::GetStripCR(BufLine); // 改行文字削除
+
         // std::cout<<BufLine<<"\n";
         std::vector<std::string> Rows;
         std::stringstream SStream(BufLine);
@@ -258,7 +287,11 @@ void KDataFrame::Open()
             continue;
         }
 
-        while (std::getline(SStream, Cells, Delimiter))  Rows.push_back(Cells);
+        while (std::getline(SStream, Cells, Delimiter)) 
+		{
+			KStringFmt::Strip(Cells);
+			Rows.push_back(Cells);
+		}
 
         // std::cout<<"\naaaaa\n";
         // if(Counter==0) std::cout<<std::endl;
@@ -275,7 +308,7 @@ void KDataFrame::Open()
             {
                 DFInfo.WidthData[iColName] = 0;
                 std::string ColName = "";
-                
+
                 if(fReg & mRegTag["columnNameEnable"])
                 {
                     ColName = Rows[iColName];
@@ -340,7 +373,7 @@ void KDataFrame::Scan(std::string col_list, int events, int width)
 
     if(InpFile.is_open())
     {
-        InpFile.clear();  
+        InpFile.clear(); 
         InpFile.seekg(0); 
 
         int Counter = 0;
@@ -348,6 +381,9 @@ void KDataFrame::Scan(std::string col_list, int events, int width)
         std::string TableLine="";
         while (std::getline(InpFile, BufLine))
         {
+			KStringFmt::GetStripCR(BufLine); // 改行文字削除
+
+
             // std::cout<<BufLine<<"\n";
             std::vector<std::string> Rows;
             std::stringstream SStream(BufLine);
@@ -364,6 +400,7 @@ void KDataFrame::Scan(std::string col_list, int events, int width)
                     if(DFInfo.WidthTableCols[ColNo]>30) continue;
                 }
 
+				KStringFmt::Strip(Cells);
                 RowTitle<<std::setw(DFInfo.WidthTableCols[ColNo]+2)<<Cells<<" | ";
                 ColNo++;
             }
@@ -410,14 +447,14 @@ template<class T> std::vector<T> KDataFrame::Get(std::string column)
 
     for(auto &Val: ValsStr) 
     {
-        #if __cplusplus > 201402L
-                auto ThisVal = StringTo(Val);
-                T &ThisVal1 = std::get<T>(ThisVal);
-                Vals.push_back(ThisVal1);
-        #else
-                auto ThisVal = StringTo<T>(Val);
-                Vals.push_back(ThisVal);
-        #endif
+        // #if __cplusplus > 201402L
+        //         auto ThisVal = KStringFmt::StringTo(Val);
+        //         T &ThisVal1 = std::get<T>(ThisVal);
+        //         Vals.push_back(ThisVal1);
+        // #else
+		auto ThisVal = KStringFmt::StringTo<T>(Val);
+		Vals.push_back(ThisVal);
+        // #endif
     }
 
     return Vals;
@@ -446,13 +483,19 @@ std::vector<std::string> KDataFrame::GetcolumnStr(std::string column)
             // コメントとカラムはスキップ
             if (Counter<DFInfo.nSkip) {Counter++; continue;}
 
+			KStringFmt::GetStripCR(BufLine); // 改行文字削除
+
             std::stringstream SStream(BufLine);
             std::string Cells;
 
             int iCol=0;
             while (std::getline(SStream, Cells, Delimiter))
             {
-                if(ColNo==iCol) Vals.push_back(Cells);
+                if(ColNo==iCol) 
+				{
+					KStringFmt::Strip(Cells);
+					Vals.push_back(Cells);
+				}
                 iCol++;
             }
             SStream.clear();
@@ -474,6 +517,79 @@ std::vector<std::string> KDataFrame::GetcolumnStr(std::string column)
 std::vector<std::string> KDataFrame::operator[] (std::string column)
 {
     return KDataFrame::GetcolumnStr(column);
+}
+
+class KSingleVectorComponent
+{
+	private:
+		std::vector<std::string> InpStrVec;
+	public:
+		//! @brief デフォルトコンストラクタ
+		KSingleVectorComponent () = default;
+		//! @brief デストラクタ
+		~KSingleVectorComponent() = default;
+
+		//! @brief 引数付きコンストラクタ
+		KSingleVectorComponent(std::initializer_list<std::string> list): InpStrVec(list) {};
+		//! @brief コピーコンストラクタ
+		KSingleVectorComponent (const KSingleVectorComponent &obj)=default;
+
+		// 追加
+	public:
+		template<typename T> void push_back(const T &val);
+		void push_back(const char *val)		  {InpStrVec.push_back(val);}
+		void push_back(const std::string &val){InpStrVec.push_back(val);}
+		template<typename T> void append   (const T &val);
+		void append	  (const char *val)		  {InpStrVec.push_back(val);}
+		void append	  (const std::string &val){InpStrVec.push_back(val);}
+
+		void Scan ();
+
+	public:
+		template<typename T> std::vector<T> AsType();
+
+	public:
+		//! @brief = 演算子のオーバーロード
+		KSingleVectorComponent& operator=(const KSingleVectorComponent& Obj) = default;
+};
+
+void KSingleVectorComponent::Scan()
+{
+	for (int i=0; i<InpStrVec.size(); i++)
+    {
+        std::cout<<InpStrVec[i];
+        if (i != InpStrVec.size()-1) std::cout<<", ";
+    }
+}
+
+//! @brief 値の追加.
+template<typename T> inline void KSingleVectorComponent::push_back(const T &val)
+{
+	std::stringstream SStream;
+	SStream << val;
+	InpStrVec.push_back(SStream.str());
+}
+
+//! @brief 値の追加
+//! @details push_back関数と同じ.
+template<typename T> inline void KSingleVectorComponent::append(const T &val)
+{
+	KSingleVectorComponent::push_back(val);
+}
+
+//! @brief 値のキャスト
+template<typename T> std::vector<T>  KSingleVectorComponent::AsType()
+{
+    std::vector<T> Vals;
+
+    for(auto &Val: InpStrVec) 
+    {
+		std::cout<<Val<<std::endl;
+		auto ThisVal = KStringFmt::StringTo<T>(Val);
+		Vals.push_back(ThisVal);
+    }
+
+    return Vals;
 }
 
 #endif
