@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['init_0',['Init',['../classKDataFrame.html#a6cdd85d733e0cc1efec9af621287e944',1,'KDataFrame']]]
+  ['empty_0',['Empty',['../classKSingleVector.html#a20d0320560accd1bd20db543c4b173d5',1,'KSingleVector']]]
 ];

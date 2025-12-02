@@ -141,15 +141,15 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a6c883f53a71e2ac452ee5e3c9296650e"><td class="memTemplItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="KDataFrame_8h.html#aae9d002ff4c7e8b3cc3c0c703d487377">T</a> &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classKDataFrame.html#a6c883f53a71e2ac452ee5e3c9296650e">Get</a> (std::string <a class="el" href="KDataFrame_8h.html#aae9d002ff4c7e8b3cc3c0c703d487377">column</a>)</td></tr>
 <tr class="memdesc:a6c883f53a71e2ac452ee5e3c9296650e"><td class="mdescLeft">&#160;</td><td class="mdescRight">指定したカラムの値を任意の型で取り出します.  <br /></td></tr>
 <tr class="separator:a6c883f53a71e2ac452ee5e3c9296650e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0aa235458d3ed363447278ba558f08ce" id="r_a0aa235458d3ed363447278ba558f08ce"><td class="memItemLeft" align="right" valign="top">std::vector&lt; std::string &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classKDataFrame.html#a0aa235458d3ed363447278ba558f08ce">operator[]</a> (<a class="el" href="KDataFrame_8h.html#aae9d002ff4c7e8b3cc3c0c703d487377">const</a> std::string <a class="el" href="KDataFrame_8h.html#aae9d002ff4c7e8b3cc3c0c703d487377">column</a>)</td></tr>
-<tr class="memdesc:a0aa235458d3ed363447278ba558f08ce"><td class="mdescLeft">&#160;</td><td class="mdescRight">配列添字演算子[]のオーバーロード.  <br /></td></tr>
-<tr class="separator:a0aa235458d3ed363447278ba558f08ce"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa755e62549727cbdbc099de8f288b76c" id="r_aa755e62549727cbdbc099de8f288b76c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classKSingleVector.html">KSingleVector</a>&lt; std::string &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classKDataFrame.html#aa755e62549727cbdbc099de8f288b76c">operator[]</a> (<a class="el" href="KDataFrame_8h.html#aae9d002ff4c7e8b3cc3c0c703d487377">const</a> std::string <a class="el" href="KDataFrame_8h.html#aae9d002ff4c7e8b3cc3c0c703d487377">column</a>)</td></tr>
+<tr class="memdesc:aa755e62549727cbdbc099de8f288b76c"><td class="mdescLeft">&#160;</td><td class="mdescRight">配列添字演算子[]のオーバーロード.  <br /></td></tr>
+<tr class="separator:aa755e62549727cbdbc099de8f288b76c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p><a class="el" href="classKDataFrame.html" title="KDataFrame class CSVパーサの制御クラス. ここだけ触っていればおｋ.">KDataFrame</a> class CSVパーサの制御クラス. ここだけ触っていればおｋ. </p>
 <p>KDataFrameの本体.実際の操作はこのクラスを使う. </p>
 
-<p class="definition">Definition at line <a class="el" href="KDataFrame_8h_source.html#l00146">146</a> of file <a class="el" href="KDataFrame_8h_source.html">KDataFrame.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="KDataFrame_8h_source.html#l00408">408</a> of file <a class="el" href="KDataFrame_8h_source.html">KDataFrame.h</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a0598510e23066b68abf289958fd2fbc1" name="a0598510e23066b68abf289958fd2fbc1"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a0598510e23066b68abf289958fd2fbc1">&#9670;&#160;</a></span>KDataFrame()</h2>
@@ -179,9 +179,9 @@ Public Member Functions</h2></td></tr>
 
 <p>引数付きデフォルトコンストラクタ </p>
 
-<p class="definition">Definition at line <a class="el" href="KDataFrame_8h_source.html#l00186">186</a> of file <a class="el" href="KDataFrame_8h_source.html">KDataFrame.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="KDataFrame_8h_source.html#l00450">450</a> of file <a class="el" href="KDataFrame_8h_source.html">KDataFrame.h</a>.</p>
 
-<p class="reference">References <a class="el" href="KDataFrame_8h_source.html#l00207">Init()</a>, <a class="el" href="KDataFrame_8h_source.html#l00231">Open()</a>, and <a class="el" href="KDataFrame_8h_source.html#l00155">SetFilename()</a>.</p>
+<p class="reference">References <a class="el" href="KDataFrame_8h_source.html#l00471">Init()</a>, <a class="el" href="KDataFrame_8h_source.html#l00495">Open()</a>, <a class="el" href="KDataFrame_8h_source.html#l00417">SetFilename()</a>, and <a class="el" href="KDataFrame_8h_source.html#l00047">StringTo()</a>.</p>
 
 </div>
 </div>
@@ -202,9 +202,9 @@ Public Member Functions</h2></td></tr>
 
 <p>デストラクタ </p>
 
-<p class="definition">Definition at line <a class="el" href="KDataFrame_8h_source.html#l00200">200</a> of file <a class="el" href="KDataFrame_8h_source.html">KDataFrame.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="KDataFrame_8h_source.html#l00464">464</a> of file <a class="el" href="KDataFrame_8h_source.html">KDataFrame.h</a>.</p>
 
-<p class="reference">References <a class="el" href="KDataFrame_8h_source.html#l00392">Close()</a>.</p>
+<p class="reference">References <a class="el" href="KDataFrame_8h_source.html#l00656">Close()</a>.</p>
 
 </div>
 </div>
@@ -227,9 +227,11 @@ Public Member Functions</h2></td></tr>
 <p>ファイルを閉じます. </p>
 <p>デストラクタでファイルが閉じられていない場合、自動で呼び出されます. </p>
 
-<p class="definition">Definition at line <a class="el" href="KDataFrame_8h_source.html#l00392">392</a> of file <a class="el" href="KDataFrame_8h_source.html">KDataFrame.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="KDataFrame_8h_source.html#l00656">656</a> of file <a class="el" href="KDataFrame_8h_source.html">KDataFrame.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="KDataFrame_8h_source.html#l00200">~KDataFrame()</a>.</p>
+<p class="reference">References <a class="el" href="KDataFrame_8h_source.html#l00047">StringTo()</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="KDataFrame_8h_source.html#l00464">~KDataFrame()</a>.</p>
 
 </div>
 </div>
@@ -261,9 +263,9 @@ template&lt;<a class="el" href="KDataFrame_8h.html#aae9d002ff4c7e8b3cc3c0c703d48
 <dl class="section return"><dt>Returns</dt><dd>指定した型のvector (std::vector&lt;T&gt;)</dd></dl>
 <p>失敗すると型変換のエラーが出ます.(多分) </p>
 
-<p class="definition">Definition at line <a class="el" href="KDataFrame_8h_source.html#l00406">406</a> of file <a class="el" href="KDataFrame_8h_source.html">KDataFrame.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="KDataFrame_8h_source.html#l00670">670</a> of file <a class="el" href="KDataFrame_8h_source.html">KDataFrame.h</a>.</p>
 
-<p class="reference">References <a class="el" href="KDataFrame_8h_source.html#l00430">GetcolumnStr()</a>, and <a class="el" href="KDataFrame_8h_source.html#l00047">StringTo()</a>.</p>
+<p class="reference">References <a class="el" href="KDataFrame_8h_source.html#l00700">GetcolumnStr()</a>, and <a class="el" href="KDataFrame_8h_source.html#l00047">StringTo()</a>.</p>
 
 </div>
 </div>
@@ -293,11 +295,11 @@ template&lt;<a class="el" href="KDataFrame_8h.html#aae9d002ff4c7e8b3cc3c0c703d48
 <dl class="section return"><dt>Returns</dt><dd>std::vector&lt;std::string&gt;</dd></dl>
 <p>失敗すると型変換のエラーが出ます. </p>
 
-<p class="definition">Definition at line <a class="el" href="KDataFrame_8h_source.html#l00430">430</a> of file <a class="el" href="KDataFrame_8h_source.html">KDataFrame.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="KDataFrame_8h_source.html#l00700">700</a> of file <a class="el" href="KDataFrame_8h_source.html">KDataFrame.h</a>.</p>
 
-<p class="reference">References <a class="el" href="KDataFrame_8h_source.html#l00127">KCsvStruct::mcolumnName</a>, <a class="el" href="KDataFrame_8h_source.html#l00121">KCsvStruct::nSkip</a>, and <a class="el" href="KDataFrame_8h_source.html#l00047">StringTo()</a>.</p>
+<p class="reference">References <a class="el" href="KDataFrame_8h_source.html#l00389">KCsvStruct::mcolumnName</a>, <a class="el" href="KDataFrame_8h_source.html#l00383">KCsvStruct::nSkip</a>, and <a class="el" href="KDataFrame_8h_source.html#l00047">StringTo()</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="KDataFrame_8h_source.html#l00406">Get()</a>, and <a class="el" href="KDataFrame_8h_source.html#l00474">operator[]()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="KDataFrame_8h_source.html#l00670">Get()</a>, and <a class="el" href="KDataFrame_8h_source.html#l00744">operator[]()</a>.</p>
 
 </div>
 </div>
@@ -326,7 +328,7 @@ template&lt;<a class="el" href="KDataFrame_8h.html#aae9d002ff4c7e8b3cc3c0c703d48
 
 <p>CSVファイルの基本情報をKCsvStruct class形式で取得します. </p>
 
-<p class="definition">Definition at line <a class="el" href="KDataFrame_8h_source.html#l00179">179</a> of file <a class="el" href="KDataFrame_8h_source.html">KDataFrame.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="KDataFrame_8h_source.html#l00441">441</a> of file <a class="el" href="KDataFrame_8h_source.html">KDataFrame.h</a>.</p>
 
 </div>
 </div>
@@ -355,11 +357,11 @@ template&lt;<a class="el" href="KDataFrame_8h.html#aae9d002ff4c7e8b3cc3c0c703d48
 
 <p>全データのイベント数を数えます. </p>
 
-<p class="definition">Definition at line <a class="el" href="KDataFrame_8h_source.html#l00175">175</a> of file <a class="el" href="KDataFrame_8h_source.html">KDataFrame.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="KDataFrame_8h_source.html#l00437">437</a> of file <a class="el" href="KDataFrame_8h_source.html">KDataFrame.h</a>.</p>
 
-<p class="reference">References <a class="el" href="KDataFrame_8h_source.html#l00129">KCsvStruct::Events</a>.</p>
+<p class="reference">References <a class="el" href="KDataFrame_8h_source.html#l00391">KCsvStruct::Events</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="KDataFrame_8h_source.html#l00328">Scan()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="KDataFrame_8h_source.html#l00592">Scan()</a>.</p>
 
 </div>
 </div>
@@ -381,9 +383,11 @@ template&lt;<a class="el" href="KDataFrame_8h.html#aae9d002ff4c7e8b3cc3c0c703d48
 <p>初期化関数 </p>
 <p>デフォルトコンストラクタ実行時に一回だけ呼び出されます.フラグのデフォルト設定を行います. </p>
 
-<p class="definition">Definition at line <a class="el" href="KDataFrame_8h_source.html#l00207">207</a> of file <a class="el" href="KDataFrame_8h_source.html">KDataFrame.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="KDataFrame_8h_source.html#l00471">471</a> of file <a class="el" href="KDataFrame_8h_source.html">KDataFrame.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="KDataFrame_8h_source.html#l00186">KDataFrame()</a>.</p>
+<p class="reference">References <a class="el" href="KDataFrame_8h_source.html#l00047">StringTo()</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="KDataFrame_8h_source.html#l00450">KDataFrame()</a>.</p>
 
 </div>
 </div>
@@ -405,22 +409,22 @@ template&lt;<a class="el" href="KDataFrame_8h.html#aae9d002ff4c7e8b3cc3c0c703d48
 <p>ファイルを開きます </p>
 <p>デフォルトコンストラクタ実行時に一回だけ呼び出されます.ファイルの存在チェック後、中身を読み取ります.このときにファイルのコメントとカラム名、データの総数を記録します. </p>
 
-<p class="definition">Definition at line <a class="el" href="KDataFrame_8h_source.html#l00231">231</a> of file <a class="el" href="KDataFrame_8h_source.html">KDataFrame.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="KDataFrame_8h_source.html#l00495">495</a> of file <a class="el" href="KDataFrame_8h_source.html">KDataFrame.h</a>.</p>
 
-<p class="reference">References <a class="el" href="KDataFrame_8h_source.html#l00126">KCsvStruct::columnName</a>, <a class="el" href="KDataFrame_8h_source.html#l00123">KCsvStruct::Comments</a>, <a class="el" href="KDataFrame_8h_source.html#l00129">KCsvStruct::Events</a>, <a class="el" href="KDataFrame_8h_source.html#l00127">KCsvStruct::mcolumnName</a>, <a class="el" href="KDataFrame_8h_source.html#l00121">KCsvStruct::nSkip</a>, <a class="el" href="KDataFrame_8h_source.html#l00133">KCsvStruct::WidthcolumnName</a>, <a class="el" href="KDataFrame_8h_source.html#l00134">KCsvStruct::WidthData</a>, and <a class="el" href="KDataFrame_8h_source.html#l00135">KCsvStruct::WidthTableCols</a>.</p>
+<p class="reference">References <a class="el" href="KDataFrame_8h_source.html#l00388">KCsvStruct::columnName</a>, <a class="el" href="KDataFrame_8h_source.html#l00385">KCsvStruct::Comments</a>, <a class="el" href="KDataFrame_8h_source.html#l00391">KCsvStruct::Events</a>, <a class="el" href="KDataFrame_8h_source.html#l00389">KCsvStruct::mcolumnName</a>, <a class="el" href="KDataFrame_8h_source.html#l00383">KCsvStruct::nSkip</a>, <a class="el" href="KDataFrame_8h_source.html#l00047">StringTo()</a>, <a class="el" href="KDataFrame_8h_source.html#l00395">KCsvStruct::WidthcolumnName</a>, <a class="el" href="KDataFrame_8h_source.html#l00396">KCsvStruct::WidthData</a>, and <a class="el" href="KDataFrame_8h_source.html#l00397">KCsvStruct::WidthTableCols</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="KDataFrame_8h_source.html#l00186">KDataFrame()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="KDataFrame_8h_source.html#l00450">KDataFrame()</a>.</p>
 
 </div>
 </div>
-<a id="a0aa235458d3ed363447278ba558f08ce" name="a0aa235458d3ed363447278ba558f08ce"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a0aa235458d3ed363447278ba558f08ce">&#9670;&#160;</a></span>operator[]()</h2>
+<a id="aa755e62549727cbdbc099de8f288b76c" name="aa755e62549727cbdbc099de8f288b76c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa755e62549727cbdbc099de8f288b76c">&#9670;&#160;</a></span>operator[]()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">std::vector&lt; std::string &gt; KDataFrame::operator[] </td>
+          <td class="memname"><a class="el" href="classKSingleVector.html">KSingleVector</a>&lt; std::string &gt; KDataFrame::operator[] </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="KDataFrame_8h.html#aae9d002ff4c7e8b3cc3c0c703d487377">const</a> std::string&#160;</td>
           <td class="paramname"><em>column</em></td><td>)</td>
@@ -439,9 +443,9 @@ template&lt;<a class="el" href="KDataFrame_8h.html#aae9d002ff4c7e8b3cc3c0c703d48
 <dl class="section return"><dt>Returns</dt><dd>std::vector&lt;std::string&gt;</dd></dl>
 <p>カラム名を指定することでカラムの値を文字列で取得できます(内部でKDataFrame::GetcolumnStr(std::string column)が呼び出される). e.g. auto f = df["aaaa"]; </p>
 
-<p class="definition">Definition at line <a class="el" href="KDataFrame_8h_source.html#l00474">474</a> of file <a class="el" href="KDataFrame_8h_source.html">KDataFrame.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="KDataFrame_8h_source.html#l00744">744</a> of file <a class="el" href="KDataFrame_8h_source.html">KDataFrame.h</a>.</p>
 
-<p class="reference">References <a class="el" href="KDataFrame_8h_source.html#l00430">GetcolumnStr()</a>, and <a class="el" href="KDataFrame_8h_source.html#l00047">StringTo()</a>.</p>
+<p class="reference">References <a class="el" href="KDataFrame_8h_source.html#l00700">GetcolumnStr()</a>, and <a class="el" href="KDataFrame_8h_source.html#l00047">StringTo()</a>.</p>
 
 </div>
 </div>
@@ -488,9 +492,9 @@ template&lt;<a class="el" href="KDataFrame_8h.html#aae9d002ff4c7e8b3cc3c0c703d48
 </dl>
 <p>だたし、非常に長いデータが格納されている場合スキップされます.スキップの基準はwidth変数によって指定できます. </p>
 
-<p class="definition">Definition at line <a class="el" href="KDataFrame_8h_source.html#l00328">328</a> of file <a class="el" href="KDataFrame_8h_source.html">KDataFrame.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="KDataFrame_8h_source.html#l00592">592</a> of file <a class="el" href="KDataFrame_8h_source.html">KDataFrame.h</a>.</p>
 
-<p class="reference">References <a class="el" href="KDataFrame_8h_source.html#l00175">GetEntries()</a>, <a class="el" href="KDataFrame_8h_source.html#l00173">SetTableWidth()</a>, <a class="el" href="KDataFrame_8h_source.html#l00132">KCsvStruct::TableWidthMax</a>, <a class="el" href="KDataFrame_8h_source.html#l00133">KCsvStruct::WidthcolumnName</a>, <a class="el" href="KDataFrame_8h_source.html#l00134">KCsvStruct::WidthData</a>, and <a class="el" href="KDataFrame_8h_source.html#l00135">KCsvStruct::WidthTableCols</a>.</p>
+<p class="reference">References <a class="el" href="KDataFrame_8h_source.html#l00437">GetEntries()</a>, <a class="el" href="KDataFrame_8h_source.html#l00435">SetTableWidth()</a>, <a class="el" href="KDataFrame_8h_source.html#l00047">StringTo()</a>, <a class="el" href="KDataFrame_8h_source.html#l00394">KCsvStruct::TableWidthMax</a>, <a class="el" href="KDataFrame_8h_source.html#l00395">KCsvStruct::WidthcolumnName</a>, <a class="el" href="KDataFrame_8h_source.html#l00396">KCsvStruct::WidthData</a>, and <a class="el" href="KDataFrame_8h_source.html#l00397">KCsvStruct::WidthTableCols</a>.</p>
 
 </div>
 </div>
@@ -520,9 +524,11 @@ template&lt;<a class="el" href="KDataFrame_8h.html#aae9d002ff4c7e8b3cc3c0c703d48
 
 <p>ファイル名を指定します </p>
 
-<p class="definition">Definition at line <a class="el" href="KDataFrame_8h_source.html#l00155">155</a> of file <a class="el" href="KDataFrame_8h_source.html">KDataFrame.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="KDataFrame_8h_source.html#l00417">417</a> of file <a class="el" href="KDataFrame_8h_source.html">KDataFrame.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="KDataFrame_8h_source.html#l00186">KDataFrame()</a>.</p>
+<p class="reference">References <a class="el" href="KDataFrame_8h_source.html#l00047">StringTo()</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="KDataFrame_8h_source.html#l00450">KDataFrame()</a>.</p>
 
 </div>
 </div>
@@ -552,11 +558,11 @@ template&lt;<a class="el" href="KDataFrame_8h.html#aae9d002ff4c7e8b3cc3c0c703d48
 
 <p>表の横幅を指定します. </p>
 
-<p class="definition">Definition at line <a class="el" href="KDataFrame_8h_source.html#l00173">173</a> of file <a class="el" href="KDataFrame_8h_source.html">KDataFrame.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="KDataFrame_8h_source.html#l00435">435</a> of file <a class="el" href="KDataFrame_8h_source.html">KDataFrame.h</a>.</p>
 
-<p class="reference">References <a class="el" href="KDataFrame_8h_source.html#l00132">KCsvStruct::TableWidthMax</a>.</p>
+<p class="reference">References <a class="el" href="KDataFrame_8h_source.html#l00047">StringTo()</a>, and <a class="el" href="KDataFrame_8h_source.html#l00394">KCsvStruct::TableWidthMax</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="KDataFrame_8h_source.html#l00328">Scan()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="KDataFrame_8h_source.html#l00592">Scan()</a>.</p>
 
 </div>
 </div>
