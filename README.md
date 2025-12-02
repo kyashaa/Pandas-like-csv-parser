@@ -284,7 +284,7 @@ int main (int argc, char **argv)
     - `df.Get<型>("カラム名")`
     - テスト段階であることもあって`int`, `double`のみ対応. これから増やしていく.
 
-[**リファレンスガイドはこちら**](https://kyasyaa.github.io/Pandas-like-csv-parser/)
+[**リファレンスガイドはこちら**](https://kyashaa.github.io/Pandas-like-csv-parser/)
 
 # 生まれた経緯
 
