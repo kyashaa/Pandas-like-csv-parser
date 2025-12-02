@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['nskip_0',['nSkip',['../structKCsvStruct.html#afcc6b9cd688720847633247d802ce029',1,'KCsvStruct']]]
+  ['mcolumnname_0',['mcolumnName',['../structKCsvStruct.html#a566d60973b59e9f27ca21ea80b5c257a',1,'KCsvStruct']]]
 ];

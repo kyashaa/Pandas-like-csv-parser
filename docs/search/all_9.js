@@ -1,7 +1,4 @@
 var searchData=
 [
-  ['tablewidthmax_0',['TableWidthMax',['../structKCsvStruct.html#aaac5aa95c68ee1f5b386d47185f86e5a',1,'KCsvStruct']]],
-  ['tkeymap_1',['tKeyMap',['../KDataFrame_8h.html#a459b622b2ecedcc113c808673a417606',1,'KDataFrame.h']]],
-  ['tkeyumap_2',['tKeyUMap',['../KDataFrame_8h.html#a6aa4b3aea6b78cbe80b59b9649048de9',1,'KDataFrame.h']]],
-  ['tvstring_3',['tvString',['../KDataFrame_8h.html#ac1368abe293cd4978a199b2770dbb3bf',1,'KDataFrame.h']]]
+  ['push_5fback_0',['push_back',['../classKSingleVectorComponent.html#ad0c9ddafffa02a0a51e16769df55950b',1,'KSingleVectorComponent::push_back(const T &amp;val)'],['../classKSingleVectorComponent.html#ac18308322b5db65712f9479f25952206',1,'KSingleVectorComponent::push_back(const char *val)'],['../classKSingleVectorComponent.html#ad3e7d253ee15dfdba42c3c57c532d05f',1,'KSingleVectorComponent::push_back(const std::string &amp;val)']]]
 ];

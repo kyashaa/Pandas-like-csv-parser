@@ -1,6 +1,5 @@
 var searchData=
 [
-  ['close_0',['Close',['../classKDataFrame.html#a3b47d0539ca582b8127bb33259c503b0',1,'KDataFrame']]],
-  ['columnname_1',['columnName',['../structKCsvStruct.html#ae0da02f5dee59a28de9bb7efd91ad492',1,'KCsvStruct']]],
-  ['comments_2',['Comments',['../structKCsvStruct.html#a165e1f275f56630bcc72445f99baad2a',1,'KCsvStruct']]]
+  ['append_0',['append',['../classKSingleVectorComponent.html#ada09cf3ce3589f37acbf8755c629821e',1,'KSingleVectorComponent::append(const T &amp;val)'],['../classKSingleVectorComponent.html#a66bc13fafb91258af68f0b76b9601034',1,'KSingleVectorComponent::append(const char *val)'],['../classKSingleVectorComponent.html#a427f93a4f8e9327cf5906c7cff2de9de',1,'KSingleVectorComponent::append(const std::string &amp;val)']]],
+  ['astype_1',['AsType',['../classKSingleVectorComponent.html#ab09b21f42e4a72b2ea19efd781c2011c',1,'KSingleVectorComponent']]]
 ];
