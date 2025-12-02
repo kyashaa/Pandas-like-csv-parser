@@ -110,6 +110,268 @@ std::ostream& operator<<(std::ostream& os, const std::vector<T>& vec)
     return os;
 }
 
+// ===        ======================
+//! @brief 配列の添字を記録する
+class KVectorIndex
+{
+private:
+	std::vector<int> Index;
+public:
+	KVectorIndex () = default;
+	~KVectorIndex() = default;
+};
+
+
+// キャスト
+template<typename From, typename To> struct KTypeConverter   {static To Convert(const From &x){return static_cast<To>(x);}};
+template<typename  T> struct KTypeConverter<		  T,  T> {static const T& Convert(const T &x){return x;}}; // 同型
+template<typename To> struct KTypeConverter<std::string, To> {static To Convert(const std::string &x) {return KStringFmt::StringTo<To>(x);}}; // std::string zu to
+template<typename To> struct KTypeConverter<const char*, To> {static To Convert(const char *x){return KStringFmt::StringTo<To>(std::string(x));}};
+
+//! @brief 四則演算用クラス
+template<typename T=std::string> class KSingleVector
+{
+	private:
+		std::vector<T> Data;
+	public:
+		//! @brief デフォルトコンストラクタ
+		KSingleVector () = default;
+		//! @brief デストラクタ
+		~KSingleVector() = default;
+		//! @brief 引数付きコンストラクタ
+		KSingleVector(std::initializer_list<T> list): Data(list) {}
+		// #if __cplusplus > 201402L
+		// KSingleVector(std::initializer_list<const char*>) -> KSingleVector<std::string>;
+		// #endif
+		//! @brief 引数付きコンストラクタ
+		KSingleVector(const std::vector    <T> list): Data(list) {}
+		//! @brief 引数付きコンストラクタ
+		//! @brief コピーコンストラクタ
+		KSingleVector (const KSingleVector &obj) = default;
+
+	public:
+		size_t Size () {return Data.size();}
+		bool   Empty() {return Data.empty();}
+		void   Scan ();
+	// Get関係
+	public:
+		//! @brief std::vector<T>で取得
+		std::vector<T> 		   ToVector() {return Data;};
+		T& 		 GetValue (std::size_t i)		{return Data[i];}
+		const T& GetValue (std::size_t i) const {return Data[i];}
+
+	private:
+		template<typename U> bool IsType   (const KSingleVector<U> &val) const;
+		template<typename U> void CheckSize(const KSingleVector<U> &val) const;
+		template<typename U> KSingleVector<T> AutoCasting (const KSingleVector<U> &val) const;
+
+	public:
+		void push_back(const T &val);
+		void append   (const T &val);
+		template<typename To> KSingleVector<To> AsType();
+
+	public:
+		//! @brief = 演算子のオーバーロード
+		KSingleVector& operator=(const KSingleVector  &obj) = default;
+		KSingleVector& operator=(const std::vector<T> &obj){Data=obj; return *this;}
+	
+		T& 		 operator[](std::size_t i)       {return Data[i];}
+		const T& operator[](std::size_t i) const {return Data[i];}
+	// 四則演算
+	public:
+		KSingleVector<T> operator+(const KSingleVector<T> &obj) const;
+		KSingleVector<T> operator-(const KSingleVector<T> &obj) const;
+		KSingleVector<T> operator*(const KSingleVector<T> &obj) const;
+		KSingleVector<T> operator/(const KSingleVector<T> &obj) const;
+		KSingleVector<T> operator+(const T val) const;
+		KSingleVector<T> operator-(const T val) const;
+		KSingleVector<T> operator*(const T val) const;
+		KSingleVector<T> operator/(const T val) const;
+	public:
+		KSingleVector<T> operator==(const T val) const;
+		KSingleVector<T> operator!=(const T val) const;
+		KSingleVector<T> operator> (const T val) const;
+		KSingleVector<T> operator< (const T val) const;
+		KSingleVector<T> operator>=(const T val) const;
+		KSingleVector<T> operator<=(const T val) const;
+};
+
+//! @brief 2つの配列のサイズを比較します.
+template<typename T> template<typename U> void KSingleVector<T>::CheckSize(const KSingleVector<U> &val) const
+{
+	if (Data.size() != val.Data.size())
+		throw std::runtime_error("KSingleVector: size mismatch!");
+}
+
+//! @brief 2つの配列の型をを比較します.
+template<typename T> template<typename U> bool KSingleVector<T>::IsType(const KSingleVector<U> &val) const
+{
+	return std::is_same<T, U>::value;
+}
+
+//! @brief キャストします.
+template<typename T> template<typename To> KSingleVector<To> KSingleVector<T>::AsType()
+{
+    KSingleVector<To> Val;
+
+    for (auto &this_val : Data)
+    {
+        Val.push_back(KTypeConverter<T, To>::Convert(this_val));
+    }
+
+    return Val;
+}
+
+
+//! @brief 自動キャストを実行します.
+template<typename T> template<typename U> KSingleVector<T> KSingleVector<T>::AutoCasting(const KSingleVector<U> &val) const
+{
+	KSingleVector::CheckSize(val);
+
+	if (KSingleVector::IsType(val)) return val;
+
+	return KSingleVector::AsType<T>(val);
+}
+
+//! @brief 値の追加.
+template<typename T> inline void KSingleVector<T>::push_back(const T &val)
+{
+	Data.push_back(val);
+}
+
+//! @brief 値の追加
+//! @details push_back関数と同じ.
+template<typename T> inline void KSingleVector<T>::append(const T &val)
+{
+	KSingleVector<T>::push_back(val);
+}
+
+
+template<typename T> void KSingleVector<T>::Scan()
+{
+	for (int i=0; i<Data.size(); i++)
+    {
+        std::cout<<Data[i];
+        if (i != Data.size()-1) std::cout<<", ";
+    }
+    std::cout<<std::endl;
+}
+
+template<typename T> inline KSingleVector<T> KSingleVector<T>::operator+(const KSingleVector<T> &obj) const
+{
+    CheckSize(obj);
+
+    KSingleVector<T> Result;
+    Result.Data.reserve(Data.size());
+    for (std::size_t i=0; i<Data.size(); i++)  Result.Data.push_back(Data[i]+obj.Data[i]);
+    return Result;
+}
+
+template<typename T> inline KSingleVector<T> KSingleVector<T>::operator-(const KSingleVector<T> &obj) const
+{
+    CheckSize(obj);
+
+    KSingleVector<T> Result;
+    Result.Data.reserve(Data.size());
+    for (std::size_t i=0; i<Data.size(); i++)  Result.Data.push_back(Data[i]-obj.Data[i]);
+    return Result;
+}
+
+template<typename T> inline KSingleVector<T> KSingleVector<T>::operator*(const KSingleVector<T> &obj) const
+{
+    CheckSize(obj);
+
+    KSingleVector<T> Result;
+    Result.Data.reserve(Data.size());
+    for (std::size_t i=0; i<Data.size(); i++)  Result.Data.push_back(Data[i]*obj.Data[i]);
+    return Result;
+}
+
+template<typename T> inline KSingleVector<T> KSingleVector<T>::operator/(const KSingleVector<T> &obj) const
+{
+    CheckSize(obj);
+
+    KSingleVector<T> Result;
+    Result.Data.reserve(Data.size());
+    for (std::size_t i=0; i<Data.size(); i++)  Result.Data.push_back(Data[i]/obj.Data[i]);
+    return Result;
+}
+
+template<typename T> inline KSingleVector<T> KSingleVector<T>::operator+(const T val) const
+{
+    KSingleVector<T> Result;
+    Result.Data.reserve(Data.size());
+    for (std::size_t i=0; i<Data.size(); i++)  Result.Data.push_back(Data[i]+val);
+    return Result;
+}
+
+template<typename T> inline KSingleVector<T> KSingleVector<T>::operator-(const T val) const
+{
+    KSingleVector<T> Result;
+    Result.Data.reserve(Data.size());
+    for (std::size_t i=0; i<Data.size(); i++)  Result.Data.push_back(Data[i]-val);
+    return Result;
+}
+
+template<typename T> inline KSingleVector<T> KSingleVector<T>::operator*(const T val) const
+{
+    KSingleVector<T> Result;
+    Result.Data.reserve(Data.size());
+    for (std::size_t i=0; i<Data.size(); i++)  Result.Data.push_back(Data[i]*val);
+    return Result;
+}
+
+template<typename T> inline KSingleVector<T> KSingleVector<T>::operator/(const T val) const
+{
+    KSingleVector<T> Result;
+    Result.Data.reserve(Data.size());
+    for (std::size_t i=0; i<Data.size(); i++)  Result.Data.push_back(Data[i]/val);
+    return Result;
+}
+
+template<typename T> inline KSingleVector<T> KSingleVector<T>::operator==(const T val) const
+{
+    KSingleVector<T> Result;
+    for (std::size_t i=0; i<Data.size(); i++)  if(Data[i]==val) Result.push_back(Data[i]);
+    return Result;
+}
+
+template<typename T> inline KSingleVector<T> KSingleVector<T>::operator!=(const T val) const
+{
+    KSingleVector<T> Result;
+    for (std::size_t i=0; i<Data.size(); i++)  if(Data[i]!=val) Result.push_back(Data[i]);
+    return Result;
+}
+
+template<typename T> inline KSingleVector<T> KSingleVector<T>::operator>(const T val) const
+{
+    KSingleVector<T> Result;
+    for (std::size_t i=0; i<Data.size(); i++)  if(Data[i]>val) Result.push_back(Data[i]);
+    return Result;
+}
+
+template<typename T> inline KSingleVector<T> KSingleVector<T>::operator<(const T val) const
+{
+    KSingleVector<T> Result;
+    for (std::size_t i=0; i<Data.size(); i++)  if(Data[i]<val) Result.push_back(Data[i]);
+    return Result;
+}
+
+template<typename T> inline KSingleVector<T> KSingleVector<T>::operator>(const T val) const
+{
+    KSingleVector<T> Result;
+    for (std::size_t i=0; i<Data.size(); i++)  if(Data[i]>val) Result.push_back(Data[i]);
+    return Result;
+}
+
+template<typename T> inline KSingleVector<T> KSingleVector<T>::operator<(const T val) const
+{
+    KSingleVector<T> Result;
+    for (std::size_t i=0; i<Data.size(); i++)  if(Data[i]<val) Result.push_back(Data[i]);
+    return Result;
+}
+// === CSV DF ======================
+
 //! @brief CSVファイルの情報を記録
 //! @details CSVファイルにおける、コメント、カラム名、全データのイベント数を記録.
 struct KCsvStruct
@@ -177,9 +439,11 @@ class KDataFrame
     public:
         //! @brief CSVファイルの基本情報をKCsvStruct class形式で取得します.
         KCsvStruct GetDFInfo() const {return DFInfo;}
+        // std::vector<std::string> GetcolumnStr(std::string column);
         std::vector<std::string> GetcolumnStr(std::string column);
         template<class T> std::vector<T> Get(std::string column);
-        std::vector<std::string> operator[] (const std::string column);
+        // std::vector<std::string> operator[] (const std::string column);
+        KSingleVector<std::string> operator[] (const std::string column);
 };
 
 //! @brief 引数付きデフォルトコンストラクタ
@@ -410,6 +674,7 @@ template<class T> std::vector<T> KDataFrame::Get(std::string column)
 
     for(auto &Val: ValsStr) 
     {
+<<<<<<< Updated upstream
         #if __cplusplus > 201402L
                 auto ThisVal = StringTo(Val);
                 T &ThisVal1 = std::get<T>(ThisVal);
@@ -418,10 +683,15 @@ template<class T> std::vector<T> KDataFrame::Get(std::string column)
                 auto ThisVal = StringTo<T>(Val);
                 Vals.push_back(ThisVal);
         #endif
+=======
+		auto ThisVal = KStringFmt::StringTo<T>(Val);
+		Vals.push_back(ThisVal);
+>>>>>>> Stashed changes
     }
 
     return Vals;
 }
+
 
 //! @brief 指定したカラムの値を文字列型で取り出します.
 //! @param[in] column 取り出したいカラム名.
@@ -471,9 +741,14 @@ std::vector<std::string> KDataFrame::GetcolumnStr(std::string column)
 //! @param[in] column 取り出したいカラム名.
 //! @return std::vector<std::string>
 //! @details カラム名を指定することでカラムの値を文字列で取得できます(内部でKDataFrame::GetcolumnStr(std::string column)が呼び出される). e.g. auto f = df["aaaa"];
-std::vector<std::string> KDataFrame::operator[] (std::string column)
+KSingleVector<std::string> KDataFrame::operator[] (std::string column)
 {
+<<<<<<< Updated upstream
     return KDataFrame::GetcolumnStr(column);
+=======
+	KSingleVector<std::string> Val = KDataFrame::GetcolumnStr(column);
+    return Val;
+>>>>>>> Stashed changes
 }
 
 #endif
