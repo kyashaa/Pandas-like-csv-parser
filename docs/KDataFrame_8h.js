@@ -8,6 +8,7 @@ var KDataFrame_8h =
     [ "KSingleVector< T >", "classKSingleVector.html", "classKSingleVector" ],
     [ "KCsvStruct", "structKCsvStruct.html", "structKCsvStruct" ],
     [ "KDataFrame", "classKDataFrame.html", "classKDataFrame" ],
+    [ "KSingleVectorComponent", "classKSingleVectorComponent.html", "classKSingleVectorComponent" ],
     [ "KVector", "KDataFrame_8h.html#a9f916087e2fcdde3138c39af1df768ac", null ],
     [ "tKeyMap", "KDataFrame_8h.html#a459b622b2ecedcc113c808673a417606", null ],
     [ "tKeyUMap", "KDataFrame_8h.html#a6aa4b3aea6b78cbe80b59b9649048de9", null ],

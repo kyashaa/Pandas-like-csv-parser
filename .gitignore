@@ -32,3 +32,9 @@
 *.app
 
 Build/
+
+*.h
+*.csv
+test.cpp
+test
+test.out
