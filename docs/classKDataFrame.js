@@ -9,7 +9,7 @@ var classKDataFrame =
     [ "GetEntries", "classKDataFrame.html#a8c012622a1763b51e6b2673890a0993c", null ],
     [ "Init", "classKDataFrame.html#a6cdd85d733e0cc1efec9af621287e944", null ],
     [ "Open", "classKDataFrame.html#a46935cab6198d5ff72dddd1e86028923", null ],
-    [ "operator[]", "classKDataFrame.html#a0aa235458d3ed363447278ba558f08ce", null ],
+    [ "operator[]", "classKDataFrame.html#aa755e62549727cbdbc099de8f288b76c", null ],
     [ "Scan", "classKDataFrame.html#a49b70ddfa6d409c2c3ce52399b3e9e43", null ],
     [ "SetFilename", "classKDataFrame.html#abedb6e12ab2d20f5efbdbf93d5b9cf71", null ],
     [ "SetTableWidth", "classKDataFrame.html#a6f002c7d289dc1902198fd0d4d633e69", null ]
