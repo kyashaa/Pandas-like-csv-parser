@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['empty_0',['Empty',['../classKSingleVector.html#a20d0320560accd1bd20db543c4b173d5',1,'KSingleVector']]]
+  ['empty_0',['empty',['../classKIndexArray.html#a010a977adf5b2223ac9445eb2db97afa',1,'KIndexArray::Empty()'],['../classKSingleVector.html#a1e69865c72f830f0ed6ef5d944baf257',1,'KSingleVector::Empty()']]]
 ];
